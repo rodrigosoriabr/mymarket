@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:MyMarket/components/input-dialog.dart';
+import 'package:MyMarket/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:MyMarket/models/item.dart';
@@ -62,7 +63,7 @@ class _LidlPageState extends State<LidlPage> {
     return Scaffold(
       body: Scrollbar(
           child: ListView.separated(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(vertical: 8.0),
               separatorBuilder: (context, index) =>
                   Divider(color: Colors.black12),
               itemCount: lidlItems.length,
@@ -70,8 +71,8 @@ class _LidlPageState extends State<LidlPage> {
                 final item = lidlItems[index];
                 return Dismissible(
                   child: CheckboxListTile(
-                    secondary: Icon(Icons.shopping_cart),
                     title: Text(item.title),
+                    secondary: CircleAvatar(child: Text(item.title[0])),
                     value: item.done,
                     onChanged: (value) {
                       if (!mounted) return;
@@ -97,7 +98,16 @@ class _LidlPageState extends State<LidlPage> {
                   },
                 );
               })),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color: defaultMaterialColor,
+        notchMargin: 2.0,
+        clipBehavior: Clip.antiAlias,
+        child: Text(""),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: defaultMaterialColor,
         onPressed: () async {
           var itemName = await asyncInputDialog(context);
           if (itemName != null) {
