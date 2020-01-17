@@ -60,7 +60,7 @@ class _LidlPageState extends State<LidlPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Scrollbar(
           child: ListView.separated(
               padding: const EdgeInsets.all(16.0),
               separatorBuilder: (context, index) =>
