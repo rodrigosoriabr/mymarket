@@ -108,6 +108,7 @@ class _LidlPageState extends State<LidlPage> {
     return Scaffold(
       body: Center(
           child: ListView.separated(
+              padding: const EdgeInsets.all(16.0),
               separatorBuilder: (context, index) => Divider(
                     color: Colors.black12,
                   ),
@@ -129,10 +130,7 @@ class _LidlPageState extends State<LidlPage> {
                   ),
                   key: Key((lidlItems.length + 1).toString()),
                   direction: DismissDirection.endToStart,
-                  background: Container(
-                    color: Colors.green,
-                    child: Icon(Icons.check),
-                  ),
+                  background: Container(child: null),
                   secondaryBackground: Container(
                     color: Colors.red,
                     child: const ListTile(

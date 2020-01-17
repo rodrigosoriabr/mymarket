@@ -107,6 +107,7 @@ class _TescoPageState extends State<TescoPage> {
     return Scaffold(
       body: Center(
           child: ListView.separated(
+              padding: const EdgeInsets.all(16.0),
               separatorBuilder: (context, index) => Divider(
                     color: Colors.black12,
                   ),
@@ -128,10 +129,7 @@ class _TescoPageState extends State<TescoPage> {
                   ),
                   key: Key((tescoItems.length + 1).toString()),
                   direction: DismissDirection.endToStart,
-                  background: Container(
-                    color: Colors.green,
-                    child: Icon(Icons.check),
-                  ),
+                  background: Container(child: null),
                   secondaryBackground: Container(
                     color: Colors.red,
                     child: const ListTile(
