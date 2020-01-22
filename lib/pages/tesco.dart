@@ -18,13 +18,14 @@ class _TescoPageState extends State<TescoPage> {
     _load();
   }
 
-  void _add(String _title) {
+  void _add(String _title, String _subTitle) {
     if (!mounted) return;
     setState(() {
       tescoItems.add(
         Item(
           id: tescoItems.length + 1,
           title: _title,
+          subtitle: _subTitle,
           done: false,
         ),
       );
@@ -66,12 +67,13 @@ class _TescoPageState extends State<TescoPage> {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               separatorBuilder: (context, index) =>
                   Divider(color: Colors.black12),
-              itemCount: tescoItems.length,              
+              itemCount: tescoItems.length,
               itemBuilder: (context, index) {
                 final item = tescoItems[index];
                 return Dismissible(
                   child: CheckboxListTile(
                     title: Text(item.title),
+                    subtitle: Text(item.subtitle),
                     secondary: Icon(
                       Icons.shopping_cart,
                     ),
@@ -113,9 +115,9 @@ class _TescoPageState extends State<TescoPage> {
                 size: 32,
               ),
               onPressed: () async {
-                var itemName = await asyncInputDialog(context);
-                if (itemName != null) {
-                  _add(itemName);
+                var result = await asyncInputDialog(context);
+                if (result != null) {
+                  _add(result['title'], result['subtitle']);
                 }
               },
             ),

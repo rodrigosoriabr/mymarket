@@ -1,27 +1,36 @@
 import 'package:MyMarket/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-Future<String> asyncInputDialog(BuildContext context) async {
-  String itemName = '';
-  return showDialog<String>(
+Future<Map<String, dynamic>> asyncInputDialog(BuildContext context) async {
+  final Map<String, dynamic> result = new Map<String, dynamic>();
+  return showDialog<Map<String, dynamic>>(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text('Enter a new item'),
-        content: new Row(
+        content: new Wrap(
           children: <Widget>[
-            new Expanded(
-                child: new TextField(
+            new TextField(
               autofocus: true,
               decoration: new InputDecoration(
-                labelText: 'Item name',
+                labelText: 'Name',
                 hintText: 'eg. Tomato',
               ),
               onChanged: (value) {
-                itemName = value;
+                result['title'] = value;
               },
-            ))
+            ),
+            new TextField(
+              autofocus: true,
+              decoration: new InputDecoration(
+                labelText: 'Quantity',
+                hintText: 'eg. 4 units',
+              ),
+              onChanged: (value) {
+                result['subtitle'] = value;
+              },
+            ),
           ],
         ),
         actions: <Widget>[
@@ -35,8 +44,8 @@ Future<String> asyncInputDialog(BuildContext context) async {
             child: Text('Ok'),
             color: defaultMaterialColor,
             onPressed: () {
-              if (itemName != "") {
-                Navigator.of(context).pop(itemName);
+              if (result['title'] != null) {
+                Navigator.of(context).pop(result);
               }
             },
           ),

@@ -1,7 +1,9 @@
+import 'package:MyMarket/pages/others.dart';
 import 'package:flutter/material.dart';
 import 'pages/aldi.dart';
 import 'pages/lidl.dart';
 import 'pages/tesco.dart';
+import 'pages/others.dart';
 import 'constants/colors.dart';
 
 void main() => runApp(MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         bottomAppBarColor: defaultMaterialColor,
       ),
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             title: Text("MyMarket List"),
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
                 Tab(text: "TESCO"),
                 Tab(text: "LIDL"),
                 Tab(text: "ALDI"),
+                Tab(text: "Others"),
               ],
             ),
           ),
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
               TescoPage(),
               LidlPage(),
               AldiPage(),
+              OthersPage(),
             ],
           ),
         ),

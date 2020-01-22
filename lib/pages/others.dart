@@ -5,25 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:MyMarket/models/item.dart';
 
-var lidlItems = new List<Item>();
-final lidlKey = "LIDL_DATA";
+var othersItems = new List<Item>();
+final tescoKey = "OTHERS_DATA";
 
-class LidlPage extends StatefulWidget {
+class OthersPage extends StatefulWidget {
   @override
-  _LidlPageState createState() => _LidlPageState();
+  _OthersPageState createState() => _OthersPageState();
 }
 
-class _LidlPageState extends State<LidlPage> {
-  _LidlPageState() {
+class _OthersPageState extends State<OthersPage> {
+  _OthersPageState() {
     _load();
   }
 
   void _add(String _title, String _subTitle) {
     if (!mounted) return;
     setState(() {
-      lidlItems.add(
+      othersItems.add(
         Item(
-          id: lidlItems.length + 1,
+          id: othersItems.length + 1,
           title: _title,
           subtitle: _subTitle,
           done: false,
@@ -36,27 +36,27 @@ class _LidlPageState extends State<LidlPage> {
   void _remove(int index) {
     if (!mounted) return;
     setState(() {
-      lidlItems.removeAt(index);
+      othersItems.removeAt(index);
       _save();
     });
   }
 
   Future _load() async {
     var prefs = await SharedPreferences.getInstance();
-    var data = prefs.getString(lidlKey);
+    var data = prefs.getString(tescoKey);
     if (data != null) {
       Iterable decoded = jsonDecode(data);
       var result = decoded.map((x) => Item.fromJson(x)).toList();
       if (!mounted) return;
       setState(() {
-        lidlItems = result;
+        othersItems = result;
       });
     }
   }
 
   _save() async {
     var prefs = await SharedPreferences.getInstance();
-    await prefs.setString(lidlKey, jsonEncode(lidlItems));
+    await prefs.setString(tescoKey, jsonEncode(othersItems));
   }
 
   @override
@@ -67,9 +67,9 @@ class _LidlPageState extends State<LidlPage> {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               separatorBuilder: (context, index) =>
                   Divider(color: Colors.black12),
-              itemCount: lidlItems.length,
+              itemCount: othersItems.length,
               itemBuilder: (context, index) {
-                final item = lidlItems[index];
+                final item = othersItems[index];
                 return Dismissible(
                   child: CheckboxListTile(
                     title: Text(item.title),
@@ -86,7 +86,7 @@ class _LidlPageState extends State<LidlPage> {
                       });
                     },
                   ),
-                  key: Key((lidlItems.length + 1).toString()),
+                  key: Key((othersItems.length + 1).toString()),
                   direction: DismissDirection.endToStart,
                   background: Container(child: null),
                   secondaryBackground: Container(

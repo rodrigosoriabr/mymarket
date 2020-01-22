@@ -18,13 +18,14 @@ class _AldiPageState extends State<AldiPage> {
     _load();
   }
 
-  void _add(String _title) {
+  void _add(String _title, String _subTitle) {
     if (!mounted) return;
     setState(() {
       aldiItems.add(
         Item(
           id: aldiItems.length + 1,
           title: _title,
+          subtitle: _subTitle,
           done: false,
         ),
       );
@@ -72,6 +73,7 @@ class _AldiPageState extends State<AldiPage> {
                 return Dismissible(
                   child: CheckboxListTile(
                     title: Text(item.title),
+                    subtitle: Text(item.subtitle),
                     secondary: Icon(
                       Icons.shopping_cart,
                     ),
@@ -113,9 +115,9 @@ class _AldiPageState extends State<AldiPage> {
                 size: 32,
               ),
               onPressed: () async {
-                var itemName = await asyncInputDialog(context);
-                if (itemName != null) {
-                  _add(itemName);
+                var result = await asyncInputDialog(context);
+                if (result != null) {
+                  _add(result['title'], result['subtitle']);
                 }
               },
             ),
