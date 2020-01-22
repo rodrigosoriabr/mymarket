@@ -21,6 +21,11 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text("MyMarket List"),
+            leading: Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+            titleSpacing: 0.0,
             bottom: TabBar(
               indicatorWeight: 5,
               indicatorColor: defaultMaterialColor[900],

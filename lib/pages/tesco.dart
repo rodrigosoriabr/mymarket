@@ -66,13 +66,15 @@ class _TescoPageState extends State<TescoPage> {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               separatorBuilder: (context, index) =>
                   Divider(color: Colors.black12),
-              itemCount: tescoItems.length,
+              itemCount: tescoItems.length,              
               itemBuilder: (context, index) {
                 final item = tescoItems[index];
                 return Dismissible(
                   child: CheckboxListTile(
                     title: Text(item.title),
-                    secondary: CircleAvatar(child: Text(item.title[0])),
+                    secondary: Icon(
+                      Icons.shopping_cart,
+                    ),
                     value: item.done,
                     onChanged: (value) {
                       if (!mounted) return;
@@ -99,23 +101,26 @@ class _TescoPageState extends State<TescoPage> {
                 );
               })),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
         color: defaultMaterialColor,
-        notchMargin: 2.0,
-        clipBehavior: Clip.antiAlias,
-        child: Text(""),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultMaterialColor,
-        onPressed: () async {
-          var itemName = await asyncInputDialog(context);
-          if (itemName != null) {
-            _add(itemName);
-          }
-        },
-        tooltip: 'Add new item',
-        child: Icon(Icons.add),
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () async {
+                var itemName = await asyncInputDialog(context);
+                if (itemName != null) {
+                  _add(itemName);
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

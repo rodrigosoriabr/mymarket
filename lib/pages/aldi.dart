@@ -72,7 +72,9 @@ class _AldiPageState extends State<AldiPage> {
                 return Dismissible(
                   child: CheckboxListTile(
                     title: Text(item.title),
-                    secondary: CircleAvatar(child: Text(item.title[0])),
+                    secondary: Icon(
+                      Icons.shopping_cart,
+                    ),
                     value: item.done,
                     onChanged: (value) {
                       if (!mounted) return;
@@ -99,23 +101,26 @@ class _AldiPageState extends State<AldiPage> {
                 );
               })),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
         color: defaultMaterialColor,
-        notchMargin: 2.0,
-        clipBehavior: Clip.antiAlias,
-        child: Text(""),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultMaterialColor,
-        onPressed: () async {
-          var itemName = await asyncInputDialog(context);
-          if (itemName != null) {
-            _add(itemName);
-          }
-        },
-        tooltip: 'Add new item',
-        child: Icon(Icons.add),
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () async {
+                var itemName = await asyncInputDialog(context);
+                if (itemName != null) {
+                  _add(itemName);
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
