@@ -73,7 +73,7 @@ class _OthersPageState extends State<OthersPage> {
                 return Dismissible(
                   child: CheckboxListTile(
                     title: Text(item.title),
-                    subtitle: Text(item.subtitle),
+                    subtitle: Text(item.subtitle ?? ""),
                     secondary: Icon(
                       Icons.shopping_cart,
                     ),
